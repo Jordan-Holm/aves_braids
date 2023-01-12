@@ -5,11 +5,8 @@ export const headerContainer = styled(Container)`
     background-color: #faefdc;
     width: auto;
     
-    @media (max-width: 1439px) {
-        img {
-            
-
-        }
+    img {
+        
     }
 `
 
@@ -17,4 +14,10 @@ export const Mainnavbar = styled(Navbar)`
     position: sticky;
     top: 0px;
     background-color: #dbcced;
+`
+
+export const NavbarIcon = styled.i`
+    @media (max-width: 1439px) {
+        display: none;
+    }
 `

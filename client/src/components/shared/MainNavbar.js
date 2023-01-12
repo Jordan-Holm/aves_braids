@@ -1,5 +1,6 @@
 import { Container, Nav, Navbar, NavDropdown, Offcanvas } from "react-bootstrap";
-import { Mainnavbar } from "./Style";
+import { BsHouseFill, BsBagDashFill, BsQuestionCircleFill, BsFillChatDotsFill, BsArrowUpRightCircleFill } from "react-icons/bs"
+import { Mainnavbar, NavbarIcon } from "./Style";
 const MainNavbar = () => {
     const lg = "lg"
     return (
@@ -18,12 +19,24 @@ const MainNavbar = () => {
                         </Offcanvas.Header>
                         <Offcanvas.Body>
                             <Nav className="me-auto">
-                                <Nav.Link href="/">Home</Nav.Link>
-                                <Nav.Link href="/">About</Nav.Link>
-                                <Nav.Link href="/">Pricing</Nav.Link>
+                                <Nav.Link href="/">
+                                    <BsHouseFill as={NavbarIcon}/>
+                                    <caption>home</caption>
+                                </Nav.Link>
+                                <Nav.Link href="/services">
+                                    <BsBagDashFill />
+                                    <caption>services</caption>
+                                </Nav.Link>
+                                <Nav.Link href="/aboutme">
+                                    <BsQuestionCircleFill />
+                                    <caption>About</caption>
+                                </Nav.Link>
+                                <Nav.Link href="/">
+                                    <BsFillChatDotsFill />
+                                    <caption>Contact</caption>
+                                </Nav.Link>
                             </Nav>
                             <Nav>
-                                <Nav.Link href="/">Contact</Nav.Link>
                                 <NavDropdown
                                     title="Socials"
                                 >

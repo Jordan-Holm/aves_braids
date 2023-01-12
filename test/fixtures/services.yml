@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  service_type: MyString
+  service_estimate: 1.5
+  approx_time: 1.5
+  service_img: MyString
+  description: MyText
+
+two:
+  service_type: MyString
+  service_estimate: 1.5
+  approx_time: 1.5
+  service_img: MyString
+  description: MyText
