@@ -21,19 +21,19 @@ const MainNavbar = () => {
                             <Nav className="me-auto">
                                 <Nav.Link href="/">
                                     <BsHouseFill as={NavbarIcon}/>
-                                    <caption>home</caption>
+                                    <p>home</p>
                                 </Nav.Link>
                                 <Nav.Link href="/services">
                                     <BsBagDashFill />
-                                    <caption>services</caption>
+                                    <p>services</p>
                                 </Nav.Link>
                                 <Nav.Link href="/aboutme">
                                     <BsQuestionCircleFill />
-                                    <caption>About</caption>
+                                    <p>About</p>
                                 </Nav.Link>
                                 <Nav.Link href="/">
                                     <BsFillChatDotsFill />
-                                    <caption>Contact</caption>
+                                    <p>Contact</p>
                                 </Nav.Link>
                             </Nav>
                             <Nav>
