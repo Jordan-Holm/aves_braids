@@ -5,7 +5,7 @@ import ServiceList from "./ServiceList";
 import ServiceForm from "./ServiceForm";
 import { ServiceConsumer } from "../../providers/ServiceProvider";
 
-const Services = ({ services, getAllServices, addService }) => {
+const Services = ({ services, getAllServices }) => {
     const [adding, setAdd] = useState(false);
 
     useEffect( () => {
@@ -34,7 +34,6 @@ const Services = ({ services, getAllServices, addService }) => {
                     </Modal.Header>
                     <Modal.Body>
                         <ServiceForm 
-                            addService={addService}
                             setAdd={setAdd}
                         />
                     </Modal.Body>

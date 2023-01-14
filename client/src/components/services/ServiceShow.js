@@ -1,7 +1,7 @@
-import { Card, Row, Col, Image } from "react-bootstrap";
+import { Card, Row, Col, Image, Button } from "react-bootstrap";
 import { ServiceConsumer } from "../../providers/ServiceProvider"
 
-const ServiceShow = ({ service_type, service_estimate, approx_time, service_img, description}) => {
+const ServiceShow = ({ id, service_type, service_estimate, approx_time, service_img, description, updateService, deleteService}) => {
 
     return (
         <Card>
@@ -13,12 +13,19 @@ const ServiceShow = ({ service_type, service_estimate, approx_time, service_img,
                     </Col>
                 </Row>
                 <Row>
-                    <h3>Starting at {service_estimate}</h3>
-                    <h3>approximatly {approx_time} hours</h3>
+                    <h5>Starting at ${service_estimate}</h5>
+                    <h5>approximatly {approx_time} hours</h5>
                     <p>{description}</p>
                 </Row>
 
             </Card.Body>
+            <Card.Footer>
+                <Button
+                    onClick={ () => deleteService(id)}
+                >
+                    Delete
+                </Button>
+            </Card.Footer>
         </Card>
     )
 }

@@ -10,20 +10,32 @@ const ServiceProvider = ({ children }) => {
 
     const getAllServices = () => {
         axios.get("/api/services")
-            .then( res => setServices(res.data) )
+            .then( res => { setServices(res.data) })
             .catch( err => console.log(err))
     }
 
     const addService = (service) => {
-        axios.post("/api/services", { service })
-            .then( res => {
-                setServices([ ...services, res.data])
-            })
+        let data = new FormData()
+
+        data.append('service_type', service.service_type)
+        data.append('service_estimate', service.service_estimate)
+        data.append('approx_time', service.approx_time)
+        data.append('service_img', service.service_img)
+        data.append('description', service.description)
+        axios.post('/api/services', data )
+            .then( res => { setServices([ ...services, res.data])})
             .catch( err => console.log(err) )
     }
 
     const updateService = ( id, service ) => {
-        axios.put(`/api/services/${id}`, { service })
+        let data = new FormData()
+
+        data.append('service_type', service.service_type)
+        data.append('service_estimate', service.service_estimate)
+        data.append('approx_time', service.approx_time)
+        data.append('service_img', service.service_img)
+        data.append('description', service.description)
+        axios.put(`/api/services/${id}`, data)
             .then( res => {
                 let newUpdatedService = services.map( s => {
                     if (s.id === id) {
@@ -46,7 +58,7 @@ const ServiceProvider = ({ children }) => {
 
     return (
         <ServiceContext.Provider value={{
-            ...services,
+            services,
             getAllServices,
             addService,
             updateService,

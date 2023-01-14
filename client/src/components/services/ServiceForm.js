@@ -4,10 +4,20 @@ import { useParams, useLocation } from "react-router-dom";
 
 import { ServiceConsumer } from "../../providers/ServiceProvider"
 
-const ServiceForm = ( addService, setAdd, updateService ) => {
+import { FilePond, registerPlugin } from "react-filepond";
+import "filepond/dist/filepond.min.css";
+import FilePondPluginImagesExifOrientation from "filepond-plugin-image-exif-orientation"
+import FilePondPluginImagePreview from "filepond-plugin-image-preview";
+import "filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css";
+registerPlugin(FilePondPluginImagesExifOrientation, FilePondPluginImagePreview);
+
+
+const ServiceForm = ({ addService, setAdd, updateService }) => {
     const [ service, setService ] = useState({ service_type: '', service_estimate: 0, approx_time: 0, service_img: '', description: '' })
+    const [file, setFile] = useState();
     const { id } = useParams();
     const location = useLocation();
+
     useEffect( () => {
         if (id) {
             const { service_type, service_estimate, approx_time, service_img, description } = location.state
@@ -15,9 +25,21 @@ const ServiceForm = ( addService, setAdd, updateService ) => {
         }
     }, [] )
 
+    const handleFileUpdate = (fileItems) => {
+        if (fileItems.length !== 0) {
+            setFile(fileItems)
+            setService({ ...service, service_img: fileItems[0].file })
+        }
+    }
+
+    const handleFileRemoved = ( e, file ) => {
+        setFile(null)
+        setService({ ...service, service_img: null })
+    }
+
     const handleSubmit = (e) => {
         e.preventDefault()
-        debugger
+
         if (id) {
             updateService(id, service)
         } else {
@@ -39,8 +61,9 @@ const ServiceForm = ( addService, setAdd, updateService ) => {
                 <Form.Control 
                     name="service_estimate"
                     type="range"
-                    min={50}
-                    max={400}
+                    step={25}
+                    min={0}
+                    max={500}
                     value={service.service_estimate}
                     onChange={ (e) => setService({ ...service, service_estimate: e.target.value })}
                 />
@@ -63,10 +86,13 @@ const ServiceForm = ( addService, setAdd, updateService ) => {
                     onChange={ (e) => setService({ ...service, description: e.target.value})}
                 />
                 <Form.Label>Service Image</Form.Label>
-                <Form.Control 
-                    name="service_img"
-                    value={service.service_img}
-                    onChange={ (e) => setService({ ...service, service_img: e.target.value})}
+                <FilePond 
+                    files={file}
+                    onupdatefiles={handleFileUpdate}
+                    onremovefile={handleFileRemoved}
+                    allowMultiple={3}
+                    name="image"
+                    labelIdle='Drag and Drop your files or <span class="filepond--label-action">Browse</span>'
                 />
             </Form.Group>
             <Button 
@@ -80,7 +106,7 @@ const ServiceForm = ( addService, setAdd, updateService ) => {
 
 const ConnectedServiceForm = (props) => (
     <ServiceConsumer>
-        { value => <ServiceForm {...props} {...value} /> }
+        { value => <ServiceForm {...value} {...props} /> }
     </ServiceConsumer>
 )
 
