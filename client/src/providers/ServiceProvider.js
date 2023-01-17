@@ -15,27 +15,14 @@ const ServiceProvider = ({ children }) => {
     }
 
     const addService = (service) => {
-        let data = new FormData()
-
-        data.append('service_type', service.service_type)
-        data.append('service_estimate', service.service_estimate)
-        data.append('approx_time', service.approx_time)
-        data.append('service_img', service.service_img)
-        data.append('description', service.description)
-        axios.post('/api/services', data )
+        axios.post('/api/services', service )
             .then( res => { setServices([ ...services, res.data])})
             .catch( err => console.log(err) )
     }
 
     const updateService = ( id, service ) => {
-        let data = new FormData()
-
-        data.append('service_type', service.service_type)
-        data.append('service_estimate', service.service_estimate)
-        data.append('approx_time', service.approx_time)
-        data.append('service_img', service.service_img)
-        data.append('description', service.description)
-        axios.put(`/api/services/${id}`, data)
+        
+        axios.put(`/api/services/${id}`, service)
             .then( res => {
                 let newUpdatedService = services.map( s => {
                     if (s.id === id) {
@@ -62,7 +49,8 @@ const ServiceProvider = ({ children }) => {
             getAllServices,
             addService,
             updateService,
-            deleteService
+            deleteService,
+            setServices: (services) => setServices(services)
         }}>
             { children }
         </ServiceContext.Provider>

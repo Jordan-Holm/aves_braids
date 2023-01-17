@@ -12,15 +12,12 @@ import "filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css";
 registerPlugin(FilePondPluginImagesExifOrientation, FilePondPluginImagePreview);
 
 
-const ServiceForm = ({ addService, setAdd, updateService }) => {
-    const [ service, setService ] = useState({ service_type: '', service_estimate: 0, approx_time: 0, service_img: '', description: '' })
+const ServiceForm = ({ addService, setAdd, updateService, setEdit, id, service_type, service_estimate, approx_time, service_img, description }) => {
+    const [ service, setService ] = useState({ service_type: '', service_estimate: 0, approx_time: 0, service_img: null, description: '' })
     const [file, setFile] = useState();
-    const { id } = useParams();
-    const location = useLocation();
 
-    useEffect( () => {
+    useEffect( () => { 
         if (id) {
-            const { service_type, service_estimate, approx_time, service_img, description } = location.state
             setService({  service_type, service_estimate, approx_time, service_img, description })
         }
     }, [] )
@@ -42,15 +39,27 @@ const ServiceForm = ({ addService, setAdd, updateService }) => {
 
         if (id) {
             updateService(id, service)
+            setEdit(false)
+            setService({ ...service, image: null})
         } else {
             addService(service)
             setAdd(false)
+            setService({ ...service, image: null })
         }
         setService({ service_type: '', service_estimate: 0, approx_time: 0, service_img: '', description: '' })
     }
     return (
         <Form onSubmit={handleSubmit}>
             <Form.Group>
+                <Form.Label>Service Image</Form.Label>
+                <FilePond 
+                    files={file}
+                    onupdatefiles={handleFileUpdate}
+                    onremovefile={handleFileRemoved}
+                    allowMultiple={3}
+                    name="image"
+                    labelIdle='Drag and Drop your files or <span class="filepond--label-action">Browse</span>'
+                />
                 <Form.Label>Braid Name</Form.Label>
                 <Form.Control
                     name="service_type"
@@ -62,8 +71,9 @@ const ServiceForm = ({ addService, setAdd, updateService }) => {
                     name="service_estimate"
                     type="range"
                     step={25}
-                    min={0}
+                    min={50}
                     max={500}
+                    defaultValue={50}
                     value={service.service_estimate}
                     onChange={ (e) => setService({ ...service, service_estimate: e.target.value })}
                 />
@@ -73,6 +83,7 @@ const ServiceForm = ({ addService, setAdd, updateService }) => {
                     type="range"
                     min={1}
                     max={8}
+                    defaultValue={1}
                     value={service.approx_time}
                     onChange={ (e) => setService({ ...service, approx_time: e.target.value })}
                 />
@@ -84,15 +95,6 @@ const ServiceForm = ({ addService, setAdd, updateService }) => {
                     size={3}
                     value={service.description}
                     onChange={ (e) => setService({ ...service, description: e.target.value})}
-                />
-                <Form.Label>Service Image</Form.Label>
-                <FilePond 
-                    files={file}
-                    onupdatefiles={handleFileUpdate}
-                    onremovefile={handleFileRemoved}
-                    allowMultiple={3}
-                    name="image"
-                    labelIdle='Drag and Drop your files or <span class="filepond--label-action">Browse</span>'
                 />
             </Form.Group>
             <Button 

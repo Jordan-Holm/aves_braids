@@ -1,59 +1,61 @@
-import { Container, Nav, Navbar, NavDropdown, Offcanvas } from "react-bootstrap";
-import { BsHouseFill, BsBagDashFill, BsQuestionCircleFill, BsFillChatDotsFill, BsArrowUpRightCircleFill } from "react-icons/bs"
-import { Mainnavbar, NavbarIcon } from "./Style";
+import { Container, Nav, Navbar, NavDropdown, Offcanvas, Row, Col } from "react-bootstrap";
+import { Mainnavbar, BrandNavbarRow, NavbarButtons } from "./Style";
 const MainNavbar = () => {
-    const lg = "lg"
+    const size = "lg";
+    
     return (
         <>
-            <Mainnavbar expand={lg}>
+            <Mainnavbar expand={size}>
                 <Container>
-                    <Navbar.Brand>Aves Braids</Navbar.Brand>
-                    <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-${lg}`}/>
-                    <Navbar.Offcanvas
-                        placement="end"
-                    >
-                        <Offcanvas.Header closeButton>
-                            <Offcanvas.Title>
-                                Aves Braids
-                            </Offcanvas.Title>
-                        </Offcanvas.Header>
-                        <Offcanvas.Body>
-                            <Nav className="me-auto">
-                                <Nav.Link href="/">
-                                    <BsHouseFill as={NavbarIcon}/>
-                                    <p>home</p>
-                                </Nav.Link>
-                                <Nav.Link href="/services">
-                                    <BsBagDashFill />
-                                    <p>services</p>
-                                </Nav.Link>
-                                <Nav.Link href="/aboutme">
-                                    <BsQuestionCircleFill />
-                                    <p>About</p>
-                                </Nav.Link>
-                                <Nav.Link href="/">
-                                    <BsFillChatDotsFill />
-                                    <p>Contact</p>
-                                </Nav.Link>
-                            </Nav>
-                            <Nav>
-                                <NavDropdown
-                                    title="Socials"
-                                >
-                                    <NavDropdown.Item>
-                                        TikTok
-                                    </NavDropdown.Item>
-                                    <NavDropdown.Item>
-                                        Instagram
-                                    </NavDropdown.Item>
-                                    <NavDropdown.Item>
-                                        Facebook
-                                    </NavDropdown.Item>
-                                </NavDropdown>
-
-                            </Nav>
-                        </Offcanvas.Body>
-                    </Navbar.Offcanvas>
+                    <Col>
+                        <BrandNavbarRow>
+                            <h1>Aves Braids</h1>
+                        </BrandNavbarRow>
+                        <NavbarButtons>
+                            <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-${size}`}/>
+                            <Navbar.Offcanvas
+                                placement="end"
+                            >
+                                <Offcanvas.Body>
+                                    <Nav id="nav-buttons">
+                                        <Nav.Link href="/" id="nav-button">
+                                            <p>Home</p>
+                                        </Nav.Link>
+                                        <Nav.Link href="/services" id="nav-button">
+                                            <p>Services</p>
+                                        </Nav.Link>
+                                        <Nav.Link href="/aboutme" id="nav-button">
+                                            <p>About</p>
+                                        </Nav.Link>
+                                        <Nav.Link href="/" id="nav-button">
+                                            <p>Contact</p>
+                                        </Nav.Link>
+                                        <NavDropdown 
+                                            title="Socials"
+                                            id="nav-dropdown"
+                                        >
+                                            <Nav.Link 
+                                                href="https://www.instagram.com/avesbraids00/?hl=en"
+                                            >
+                                                Instagram
+                                            </Nav.Link>
+                                            <Nav.Link 
+                                                href="https://www.instagram.com/avesbraids00/?hl=en"
+                                            >
+                                                TikTok
+                                            </Nav.Link>
+                                            <Nav.Link 
+                                                href="https://www.facebook.com/avesbraids00"
+                                            >
+                                                Facebook
+                                            </Nav.Link>
+                                        </NavDropdown>
+                                    </Nav>
+                                    
+                                </Offcanvas.Body>
+                            </Navbar.Offcanvas>
+                        </NavbarButtons>
+                    </Col>
                 </Container>
             </Mainnavbar>
         </>

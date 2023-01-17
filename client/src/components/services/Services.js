@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Container, Modal,} from "react-bootstrap";
 
+import StandardList from "./StandardList";
 import ServiceList from "./ServiceList";
 import ServiceForm from "./ServiceForm";
 import { ServiceConsumer } from "../../providers/ServiceProvider";
@@ -18,7 +19,6 @@ const Services = ({ services, getAllServices }) => {
                 <h1>
                     Services
                 </h1>
-
                 <button
                     onClick={ () => setAdd(true)}
                 >
@@ -39,9 +39,10 @@ const Services = ({ services, getAllServices }) => {
                     </Modal.Body>
                 </Modal>
 
-                <ServiceList 
-                    services={services}
-                />
+                <StandardList />
+
+                <ServiceList />
+                
             </Container>
         </>
     )
