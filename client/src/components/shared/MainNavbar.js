@@ -1,16 +1,26 @@
 import { Container, Nav, Navbar, NavDropdown, Offcanvas, Row, Col } from "react-bootstrap";
-import { Mainnavbar, BrandNavbarRow, NavbarButtons } from "./Style";
+import { NavLink } from "react-router-dom";
+import { Mainnavbar, NavbarButtons  } from "./Style";
 const MainNavbar = () => {
     const size = "lg";
+
+    let activeStyle = {
+        textDecoration: "underline",
+        color: "rgb(242, 199, 214)",
+    }
+
+    let unActiveStyle = {
+        textDecoration: "none",
+    }
     
     return (
         <>
             <Mainnavbar expand={size}>
                 <Container>
                     <Col>
-                        <BrandNavbarRow>
+                        <Row>
                             <h1>Aves Braids</h1>
-                        </BrandNavbarRow>
+                        </Row>
                         <NavbarButtons>
                             <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-${size}`}/>
                             <Navbar.Offcanvas
@@ -18,17 +28,29 @@ const MainNavbar = () => {
                             >
                                 <Offcanvas.Body>
                                     <Nav id="nav-buttons">
-                                        <Nav.Link href="/" id="nav-button">
-                                            <p>Home</p>
+                                        <Nav.Link
+                                            href="/home"
+                                            id="nav-buttons"
+                                        >
+                                            Home
                                         </Nav.Link>
-                                        <Nav.Link href="/services" id="nav-button">
-                                            <p>Services</p>
+                                        <Nav.Link
+                                            href="/services"
+                                            id="nav-buttons"
+                                        >
+                                            Services
                                         </Nav.Link>
-                                        <Nav.Link href="/aboutme" id="nav-button">
-                                            <p>About</p>
+                                        <Nav.Link
+                                            href="/about"
+                                            id="nav-buttons"
+                                        >
+                                            About
                                         </Nav.Link>
-                                        <Nav.Link href="/" id="nav-button">
-                                            <p>Contact</p>
+                                        <Nav.Link
+                                            href="/contact"
+                                            id="nav-buttons"
+                                        >
+                                            Contact
                                         </Nav.Link>
                                         <NavDropdown 
                                             title="Socials"

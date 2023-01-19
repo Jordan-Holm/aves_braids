@@ -4,6 +4,7 @@ import { Button, Container, Table, Modal } from "react-bootstrap";
 import ServiceForm from "./ServiceForm";
 import { ServiceConsumer } from "../../providers/ServiceProvider";
 
+
 const StandardList = ({ id, service_type, service_estimate, approx_time, service_img, description, services, deleteService }) => {
     const [showing, setShow] = useState(false);
     const [editing, setEdit] = useState(false, 0);
@@ -17,6 +18,7 @@ const StandardList = ({ id, service_type, service_estimate, approx_time, service
                         <th>Style Name</th>
                         <th>Starting Price</th>
                         <th>Expected Time</th>
+                        <th>Contact To Book</th>
                         <th>Edit</th>
                         <th>Delete</th>
                     </tr>
@@ -28,6 +30,13 @@ const StandardList = ({ id, service_type, service_estimate, approx_time, service
                                 <td>{s.service_type}</td>
                                 <td>${s.service_estimate}+</td>
                                 <td>{s.approx_time} Hours</td>
+                                <td>
+                                    <Button
+                                        href="/contact"
+                                    >
+                                        Schedule
+                                    </Button>
+                                </td>
                                 <td>
                                     <Button
                                         onClick={ () => setEdit(true, s.id)}

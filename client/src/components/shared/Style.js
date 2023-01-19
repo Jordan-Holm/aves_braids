@@ -1,4 +1,5 @@
 import { Container, Navbar, Row } from "react-bootstrap";
+import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 
 export const headerContainer = styled(Container)`
@@ -22,16 +23,45 @@ export const Mainnavbar = styled(Navbar)`
     }
 `
 
-export const BrandNavbarRow = styled(Row)`
+export const NavLinkActiveCheck = styled.link`
     
+    #activeStyle {
+        color: rgb(242, 199, 214);
+        font-size: 2vw;
+    
+        &:hover {
+            color: white;
+        }
+    }
+
+    #unActiveStyle {
+        color: white;
+        font-size: 2vw;
+        text-decoration: none'
+    
+        &:hover {
+            color: rgb(242, 199, 214);
+        }
+    }
+
+`
+
+export const unActiveStyle = styled(NavLink)`
+    color: white;
+    font-size: 2vw;
+
+    &:hover {
+        color: rgb(242, 199, 214);
+    } 
 `
 
 export const NavbarButtons = styled(Row)`
     display: inline-block;
-    p {
+    
+    #nav-buttons {
         color: white;
         font-size: 2vw;
-
+    
         &:hover {
             color: rgb(242, 199, 214);
         }
